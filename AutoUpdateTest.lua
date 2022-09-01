@@ -3,13 +3,16 @@ script_autho = 'Jamelia / brosky'
 
 require 'lib.moonloader'
 local dlstatus = require('moonloader').download_status
-local incfg = require 'inicfg'
+local inicfg = require 'inicfg'
 local imgui = require 'imgui'
+local encoding = require 'encoding'
 
 encoding.default = 'CP1251'
-u8 = encoding.UTF*
+u8 = encoding.UTF8
 
-local script_ver = 1 
+update_state = false
+
+local script_ver = 1
 local script_vers_text = '1.00'
 
 local script_path  = thisScript().path 
@@ -51,5 +54,5 @@ function main()
 end
 
 function cmd(arg)
-    sampShowDialog(1000, 'xd1', 'xd2', 'xd3', '' 0)
+    sampShowDialog(1000, 'xd1', 'xd2', 'xd3', '', 0)
 end
