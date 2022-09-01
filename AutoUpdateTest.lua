@@ -1,9 +1,10 @@
 script_name = 'AutoUpdate'
-script_autho = 'Jamelia / brosky'
+script_author = 'Jamelia / brosky'
 
 require 'lib.moonloader'
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
+local vkeys = require 'vkeys'
 local imgui = require 'imgui'
 local encoding = require 'encoding'
 
@@ -12,8 +13,8 @@ u8 = encoding.UTF8
 
 update_state = false
 
-local script_ver = 2
-local script_vers_text = '2.00'
+local script_ver = 1
+local script_ver_text = '1.00'
 
 local script_path  = thisScript().path 
 local script_url = 'https://raw.githubusercontent.com/brosky0/Scripts/main/AutoUpdateTest.lua'
@@ -27,11 +28,11 @@ function main()
   
     sampRegisterChatCommand('update', cmd)
 
-    downloadUrlToFile(update_url, update_path, function(id, stauts)
+    downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
-            if tonumber(updateIni.vers) > script_ver then
-                smapAddChatMessage('There is an update' .. updateIni.vers_text, -1)
+            if tonumber(updateIni.info.ver) > script_ver then
+                smapAddChatMessage('There is an update' .. updateIni.info.ver_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -44,8 +45,8 @@ function main()
         wait(0)
         
         if update_state then
-            downloadUrlToFile(script_url, script_path, function(id, stauts)
-                if status == dlstatus.ENDDOWNLOADDATA then
+            downloadUrlToFile(script_url, script_path, function(id, status)
+                if status == dlstatus.STATUS_ENDDOWNLOADDATA then
                     smapAddChatMessage('Script Updated', -1)
                     thisScript():reload()
                 end
