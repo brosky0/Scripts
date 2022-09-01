@@ -29,7 +29,7 @@ function main()
 
     downloadUrlToFile(update_url, update_path, function(id, stauts)
         if status == dlstatus.ENDDOWNLOADDATA then
-            updateIni = inicfg.loag(nil, update_path)
+            updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.vers) > script_ver then
                 smapAddChatMessage('There is an update' .. updateIni.info.script_vers_text)
                 update_state = true
