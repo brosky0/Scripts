@@ -13,8 +13,8 @@ u8 = encoding.UTF8
 
 update_state = false
 
-local script_ver = 1
-local script_ver_text = '1.00'
+local script_ver = 2
+local script_ver_text = '2.00'
 
 local script_path  = thisScript().path 
 local script_url = 'https://raw.githubusercontent.com/brosky0/Scripts/main/AutoUpdateTest.lua'
