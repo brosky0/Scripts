@@ -28,7 +28,7 @@ function main()
     sampRegisterChatCommand('update', cmd)
 
     downloadUrlToFile(update_url, update_path, function(id, stauts)
-        if dlstatus == dlstatus.ENDDOWNLOADDATA then
+        if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.vers) > script_ver then
                 smapAddChatMessage('There is an update' .. updateIni.vers_text, -1)
@@ -37,6 +37,7 @@ function main()
             os.remove(update_path)
         end
     end)
+    
 
 
     while true do
