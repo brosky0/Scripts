@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 
 update_state = false
 
-local script_ver = 1
-local script_vers_text = '1.00'
+local script_ver = 2
+local script_vers_text = '2.00'
 
 local script_path  = thisScript().path 
 local script_url = 'https://raw.githubusercontent.com/brosky0/Scripts/main/AutoUpdateTest.lua'
@@ -28,15 +28,16 @@ function main()
     sampRegisterChatCommand('update', cmd)
 
     downloadUrlToFile(update_url, update_path, function(id, stauts)
-        if status == dlstatus.ENDDOWNLOADDATA then
+        if dlstatus == dlstatus.ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
-            if tonumber(updateIni.info.vers) > script_ver then
-                smapAddChatMessage('There is an update' .. updateIni.info.script_vers_text)
+            if tonumber(updateIni.vers) > script_ver then
+                smapAddChatMessage('There is an update' .. updateIni.vers_text, -1)
                 update_state = true
             end
             os.remove(update_path)
         end
     end)
+
 
     while true do
         wait(0)
@@ -54,5 +55,5 @@ function main()
 end
 
 function cmd(arg)
-    sampShowDialog(1000, 'xd1', 'xd2', 'xd3', '', 0)
+    sampShowDialog(1000, '', 'AutoUpdate Checker', 'Close', '', 0)
 end
