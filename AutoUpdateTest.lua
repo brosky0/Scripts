@@ -32,7 +32,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.ver) > script_ver then
-                smapAddChatMessage('There is an update' .. updateIni.info.ver_text, -1)
+                sampAddChatMessage('There is an update' .. updateIni.info.ver_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -47,7 +47,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    smapAddChatMessage('Script Updated', -1)
+                    sampAddChatMessage('Script Updated', -1)
                     thisScript():reload()
                 end
             end)
